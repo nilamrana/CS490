@@ -1,0 +1,57 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+</head>
+<body background = "image_handler.jpg" class = "login">
+<style>
+
+.center{
+position: fixed;
+    width: 400px;
+    height: 300px;
+    top: 50%;
+    left: 70%;
+    margin-top: -350px;
+    margin-right: -450px;
+    border-radius: 3px;
+    border: 5px solid #A80000;
+    box-align: center;
+    text-align: center;
+}
+</style>
+<div class="center">
+<form class = "login-form" id = loginform>
+
+<h3 class="font-green"> CS490 LOGIN </h3>
+UCID<input type="text" name="ucid" id="ucid" autocomplete="off" placeholder="required" required><br><br><br>
+PASSWORD<input type="password" name="password" id="password" autocomplete="off" placeholder="required" required><br><br><br>
+<input type="button" value="login" onclick="login(this.form)">
+      
+               
+</form>
+<div id ="result">
+<h2> Response Will Be Print Here..</h2>
+</div>
+</div>	
+</body>
+</html>
+
+<script>
+function login(form){
+    var ucid = documnet.getElementById("ucid").value;
+    var password = documnet.getElementById("password").value;
+  
+  xmlhttp=new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+  {
+		if(this.readyState==4 && this.status==200)
+    {        console.log(this.responseText);
+             var data = JSON.parse(this.responseText);
+		  document.getElementById("result").innerHTML=this.responseText;
+		}
+	}
+	xmlhttp.open("POST","../CS490alpha/front.php",true);
+  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send('ucid='+ucid+'&password='+password);
+}
+</script>
